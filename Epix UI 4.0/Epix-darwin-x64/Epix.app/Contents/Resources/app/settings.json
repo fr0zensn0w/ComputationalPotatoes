@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "Default",
+        "Tag": "default",
+        "TimeStart": "0",
+        "TimeEnd": "7"
+    },
+    {
+        "Name": "Default2",
+        "Tag": "default",
+        "TimeStart": "0",
+        "TimeEnd": "7"
+    },
+    {
+        "Name": "Default3",
+        "Tag": "default",
+        "TimeStart": "0",
+        "TimeEnd": "7"
+    }
+]
