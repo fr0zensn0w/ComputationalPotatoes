@@ -3,14 +3,29 @@
     // to the parent element, and returns the reference to
     // the newly created canvas element
 
+    var img = document.createElement("img");
 
     function createCanvas(parent, width, height) {
         var canvas = {};
         canvas.node = document.createElement('canvas');
         canvas.context = canvas.node.getContext('2d');
+        // var c = canvas.getContext('2d');
         canvas.node.width = width || 100;
         canvas.node.height = height || 100;
+        // c.drawImage(img, 0, 0);
         parent.appendChild(canvas.node);
+
+        img.src = "frame0265.png";
+          img.onload = function (a) {
+              console.log("image loaded")
+              var h = a.target.height,
+                  w = a.target.width;
+              var c = canvas.node.getContext('2d');
+              canvas.node.width = w;
+              canvas.node.height = h;
+              c.drawImage(img, 0, 0);
+          };
+
         return canvas;
     }
 
@@ -38,7 +53,7 @@
             }
             var x = e.pageX - this.offsetLeft;
             var y = e.pageY - this.offsetTop;
-            var radius = 8; // or whatever
+            var radius = 20; // or whatever
             var fillColor = '#00ff00';
             ctx.fillCircle(x, y, radius, fillColor);
         };
