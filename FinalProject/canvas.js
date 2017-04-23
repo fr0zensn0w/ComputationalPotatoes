@@ -3,6 +3,15 @@
     // to the parent element, and returns the reference to
     // the newly created canvas element
 
+    const fs = require('fs');
+    fs.readdir('./', (err, files) => {
+      files.forEach(file => {
+        console.log(file);
+      });
+    })
+    // var canvasBuffer = require('electron-canvas-to-buffer')
+
+
     var img = document.createElement("img");
 
     function createCanvas(parent, width, height) {
