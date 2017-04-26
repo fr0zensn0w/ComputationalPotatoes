@@ -6,7 +6,7 @@
     const fs = require('fs');
     fs.readdir('./', (err, files) => {
       files.forEach(file => {
-        console.log(file);
+        // console.log(file);
       });
     })
     // var canvasBuffer = require('electron-canvas-to-buffer')
@@ -23,6 +23,7 @@
         canvas.node.height = height || 100;
         // c.drawImage(img, 0, 0);
         parent.appendChild(canvas.node);
+        // console.log("canvas", canvas)
 
         img.src = "frame0265.png";
           img.onload = function (a) {
@@ -34,12 +35,12 @@
               canvas.node.height = h;
               c.drawImage(img, 0, 0);
           };
-
         return canvas;
     }
 
     function init(container, width, height, fillColor) {
         var canvas = createCanvas(container, width, height);
+
         var ctx = canvas.context;
         // define a custom fillCircle method
         ctx.fillCircle = function(x, y, radius, fillColor) {
@@ -72,9 +73,47 @@
         canvas.node.onmouseup = function(e) {
             canvas.isDrawing = false;
         };
+
+        // var myImage = canvas.node.toDataURL("image/png")
+        // console.log(myImage)
+        var canvasBuffer = require('electron-canvas-to-buffer')
+        var buffer = canvasBuffer(canvas.node, 'image/png')
+        fs.writeFile('image.png', buffer, function (err) {
+          console.log("image written")
+        })
+
+        // console.log(document.getElementById('idownload').href)
+        // document.getElementById('idownload').setAttribute('href', myImage)
+        // console.log(document.getElementById('idownload').href)
+        // var canvasBuffer = require('electron-canvas-to-buffer')
+        // var buffer = canvasBuffer(canvas.node, 'image/png')
+        // fs.writeFile('image.png', buffer, function(err) {
+        //     console.log("canvas written")
+        // })
     }
 
     var container = document.getElementById('canvas');
     init(container, 200, 200, '#ddd');
 
 })();
+
+function saveImage() {
+    var canvasBuffer = require('electron-canvas-to-buffer')
+    var fs = require('fs')
+
+    // your canvas drawing
+    // var canvas = document.createElement('canvas')
+    // var context = canvas.getContext('2d')
+    // context.fillRect(0, 0, 50, 50)
+    // context.fillStyle = 'red'
+    // context.fillRect(50, 10, 30, 20)
+
+    // as a buffer
+    var buffer = canvasBuffer(canvas.node, 'image/png')
+    console.log(buffer)
+
+    // write canvas to file
+    fs.writeFile('image.png', buffer, function (err) {
+      console.log("image written")
+    })
+}
