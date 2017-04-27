@@ -5,11 +5,11 @@ const {shell} = require('electron')
 const fs = require('fs')
 
 
-function openPhotoGallery() {
+function openFileCabinet() {
     // alert("open the gallery")
     // TODO: put code in here to open the gallery, AKA open up to where the images are stored
     fullPath = "/Users/liquidsn0w/Desktop/"
-    fullPath = __dirname + "/videos/source"
+    fullPath = __dirname + "/video/source"
     // shell.beep() //makes a beeping sound
     shell.showItemInFolder(fullPath)
 }
