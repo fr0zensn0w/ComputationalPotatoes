@@ -72,7 +72,7 @@ var __slice = Array.prototype.slice;
         format = "jpeg";
       }
       mime = "image/" + format;
-      console.log(this.el.toDataURL)
+      // console.log(this.el.toDataURL)
       // return window.location.assign(this.el.toDataURL(mime));
 
 // ------ Electron downloading of the canvas start
@@ -80,7 +80,7 @@ var __slice = Array.prototype.slice;
       var fs = require('fs')
       var buffer = canvasBuffer(this.el, 'image/png')
       fs.writeFile('images/source/mask.png', buffer, function (err) {
-          console.log("image written in SKETCH")
+          console.log("image written to images/source")
           alert("mask saved")
       })
       return

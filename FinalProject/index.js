@@ -1,10 +1,14 @@
-
 const remote = require('electron').remote
 const main = remote.require('./main.js')
 const {shell} = require('electron')
 const fs = require('fs')
 
+var util = require("util");
+var spawn = require("child_process").spawn;
 
+
+// function that opens the native file explorer (Finder or Windows Explorer)
+// needed so that the person using this can "import thier video"
 function openFileCabinet() {
     // alert("open the gallery")
     // TODO: put code in here to open the gallery, AKA open up to where the images are stored
@@ -13,3 +17,33 @@ function openFileCabinet() {
     // shell.beep() //makes a beeping sound
     shell.showItemInFolder(fullPath)
 }
+
+
+// function to call the python script that cuts the video into images and saves
+// them to images/source
+function processVideoToImages() {
+    var process = spawn('python',["test.py"]);
+    util.log('reading in python file')
+    process.stdout.on('data',function(chunk){
+        var textChunk = chunk.toString('utf8');// buffer to string
+        console.log(textChunk)
+        util.log(textChunk);
+        alert("Video to image conversion complete")
+    });
+}
+
+// TODO add a python script and call it here that processes the images and combines
+// them using the mask (pull parts from the first image and second/3rd/4th etc image)
+function coreProcessing() {
+    console.log("coreProcessing started")
+    var process = spawn('python',["processing.py"]);
+    util.log('reading in python file')
+    process.stdout.on('data',function(chunk){
+        var textChunk = chunk.toString('utf8');// buffer to string
+        console.log(textChunk)
+        util.log(textChunk);
+        alert("Video to image conversion complete")
+    });
+}
+
+// TODO create a function that calls node module to create a GIF from the output images
