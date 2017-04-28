@@ -13,7 +13,7 @@ function openFileCabinet() {
     // alert("open the gallery")
     // TODO: put code in here to open the gallery, AKA open up to where the images are stored
     fullPath = "/Users/liquidsn0w/Desktop/"
-    fullPath = __dirname + "/video/source"
+    fullPath = __dirname + "/images"
     // shell.beep() //makes a beeping sound
     shell.showItemInFolder(fullPath)
 }
@@ -22,13 +22,16 @@ function openFileCabinet() {
 // function to call the python script that cuts the video into images and saves
 // them to images/source
 function processVideoToImages() {
-    var process = spawn('python',["test.py"]);
-    util.log('reading in python file')
+    var process = spawn('python',["video_to_frames.py"]);
+    util.log('reading in python file to convert video to images')
     process.stdout.on('data',function(chunk){
         var textChunk = chunk.toString('utf8');// buffer to string
         console.log(textChunk)
         util.log(textChunk);
-        alert("Video to image conversion complete")
+        if (textChunk.includes("IMAGE EXTRACTION COMPLETE")) {
+            alert("Video to Image Conversion Complete")
+        }
+        // alert("Video to image conversion complete")
     });
 }
 
