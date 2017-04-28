@@ -30,6 +30,7 @@ function processVideoToImages() {
         util.log(textChunk);
         if (textChunk.includes("IMAGE EXTRACTION COMPLETE")) {
             alert("Video to Image Conversion Complete")
+            location.reload()
         }
         // alert("Video to image conversion complete")
     });
