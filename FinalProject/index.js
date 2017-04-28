@@ -47,3 +47,36 @@ function coreProcessing() {
 }
 
 // TODO create a function that calls node module to create a GIF from the output images
+function createGIF() {
+    gifshot.createGIF({
+    gifWidth: 320,
+    gifHeight: 240,
+    images: [
+        'http://i.imgur.com/2OO33vX.jpg',
+        'http://i.imgur.com/qOwVaSN.png',
+        'http://i.imgur.com/Vo5mFZJ.gif'
+    ],
+    interval: 0.15,
+    numFrames: 20,
+    text: 'computationalPotatoes'
+    }, function (obj) {
+      if (!obj.error) {
+          var image = obj.image, animatedImage = document.createElement('img');
+          animatedImage.src = image;
+          document.body.appendChild(animatedImage);
+
+          download = document.createElement("button")
+          // download.href = image;
+          // download.className = "button"
+          download.name = "Download GIF"
+          // download.data="computationalPotatoGIF.gif"
+          download.target="_blank"
+          download.setAttribute('class', "button")
+          download.setAttribute('data', image)
+          download.setAttribute('download', "computationalPotatoGIF.gif")
+          // console.log(download.href)
+          document.body.appendChild(download)
+
+      }
+    });
+}

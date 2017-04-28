@@ -79,6 +79,7 @@ var __slice = Array.prototype.slice;
       var canvasBuffer = require('electron-canvas-to-buffer')
       var fs = require('fs')
       var buffer = canvasBuffer(this.el, 'image/png')
+      console.log(this.el)
       fs.writeFile('images/source/mask.png', buffer, function (err) {
           console.log("image written to images/source")
           alert("mask saved")
