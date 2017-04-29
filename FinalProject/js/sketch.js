@@ -80,7 +80,7 @@ var __slice = Array.prototype.slice;
       var fs = require('fs')
       var buffer = canvasBuffer(this.el, 'image/png')
       console.log(this.el)
-      fs.writeFile('images/source/mask.png', buffer, function (err) {
+      fs.writeFile('images/source/mask.jpg', buffer, function (err) {
           console.log("image written to images/source")
           alert("mask saved")
       })
