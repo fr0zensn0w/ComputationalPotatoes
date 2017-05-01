@@ -49,6 +49,28 @@
             border: 1px solid black; height: 30px; line-height: 30px; padding: 0 10px; vertical-align: middle; text-align: center; text-decoration: none; display: inline-block; color: black; font-weight: bold;
           }
         </style>
+
+        <!-- <script>
+            var img = document.createElement("img");
+            console.log(img)
+            // making these global so they can be called in the canvas to make it the proper size
+            var h, w
+            img.src = "images/source/videoframe0001.jpg";
+            console.log("image h, w", h, w)
+              img.onload = function (a) {
+                  console.log("image loaded")
+                  h = a.target.height,
+                  w = a.target.width;
+                  console.log("height and width", h, w)
+                  h = img.clientHeight
+                  w = img.clientWidth
+                  console.log("height and width", h, w)
+                  // var c = canvas.node.getContext('2d');
+                  // canvas.node.width = w;
+                  // canvas.node.height = h;
+                  // c.drawImage(img, 0, 0);
+              };
+        </script> -->
     </head>
     <!-- <body bgcolor="#2C2C2C"> -->
     <body>
@@ -73,9 +95,10 @@
 
       <button class="button" href="#" onclick="openFileCabinet()">Click to upload video</button>
       <button class="button" href="#" onclick="processVideoToImages()">Click to convert the video to images</button>
-      <div>
+
+      <!-- <div>
         <button class="button" onclick="this.parentNode.style.display = 'none'">Click to hide</button>
-      </div>
+      </div> -->
 
       <header>________________________________________________________________________________________________________</header>
       <header>Draw over the part you would like to keep the motion</header>
@@ -83,8 +106,32 @@
           <div class='tools'>
             <a href='#colors_sketch' data-download='png' style='float: right; width: 100px;'>Download</a>
           </div>
-          <canvas id='colors_sketch' width=640 height=480 style="background:url(images/source/videoframe0001.jpg) no-repeat center center;"></canvas>
+          <canvas id='colors_sketch' width=w height=h style="background:url(images/source/videoframe0001.jpg) no-repeat center center;"></canvas>
           <script type='text/javascript'>
+              var img = document.createElement("img");
+              console.log(img)
+              // making these global so they can be called in the canvas to make it the proper size
+              var h, w
+              img.src = "images/source/videoframe0001.jpg";
+              console.log("image h, w", h, w)
+                img.onload = function (a) {
+                    console.log("image loaded")
+                    h = a.target.height,
+                    w = a.target.width;
+                    console.log("height and width", h, w)
+                    // h = img.clientHeight
+                    // w = img.clientWidth
+                    // console.log("height and width", h, w)
+                    // var c = canvas.node.getContext('2d');
+                    // canvas.node.width = w;
+                    // canvas.node.height = h;
+                    // c.drawImage(img, 0, 0);
+                    canvas = document.getElementById('colors_sketch')
+                    canvas.height = h
+                    canvas.width = w
+                };
+
+
             $(function() {
               // $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
               //   $('#colors_demo .tools').append("<a href='#colors_sketch' data-color='" + this + "' style='width: 10px; background: " + this + ";'></a> ");
@@ -96,7 +143,7 @@
             });
           </script>
         </div>
-      <<!-- div class='demo' id='colors_demo'>
+      <!-- <div class='demo' id='colors_demo'>
           <div class='tools'>
             <a class="button" href='#colors_sketch' data-download='png' style='float: right; width: 100px;'>Save Mask</a>
           </div>
@@ -146,7 +193,7 @@
         </div> -->
 
         <!-- just a pangolin -->
-        <a href="data:image/jpeg;base64,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" download="pangolin.jpg" target="_blank">Click for a Pangolin</a>
+        <!-- <a href="data:image/jpeg;base64,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" download="pangolin.jpg" target="_blank">Click for a Pangolin</a> -->
 
         <header>________________________________________________________________________________________________________</header>
         <button onclick="coreProcessing()" class="button">Click to create your cinemagraph</button>

@@ -27,7 +27,7 @@ function processVideoToImages() {
     process.stdout.on('data',function(chunk){
         var textChunk = chunk.toString('utf8');// buffer to string
         console.log(textChunk)
-        util.log(textChunk);
+        // util.log(textChunk);
         if (textChunk.includes("IMAGE EXTRACTION COMPLETE")) {
             alert("Video to Image Conversion Complete")
             location.reload()
@@ -60,7 +60,8 @@ function coreProcessing() {
         // console.log(textChunk)
         util.log(textChunk);
         if (textChunk.includes("FRAME MODIFICATION COMPLETE")) {
-            alert("Frame modification complete")
+            // alert("Frame modification complete")
+            createGIF0()
             // location.reload()
         }
         // alert("Video to image conversion complete")
@@ -68,6 +69,7 @@ function coreProcessing() {
 }
 
 var imagesArray = []
+var count
 function createGIF0() {
     console.log("creating GIF")
     const imageSource = './images/out';
@@ -83,12 +85,12 @@ function createGIF0() {
         if (count == files.length) {
             createGIF()
         }
-        
+
       });
     })
-    
+
     console.log(imagesArray)
-    
+
 }
 
 
@@ -104,8 +106,8 @@ function createGIF() {
     //     'images/out/videoframe0001.jpg'
     // ],
     images: imagesArray,
-    interval: 0.15,
-    numFrames: 20,
+    interval: 0.005,
+    numFrames: count,
     text: 'computationalPotatoes'
     }, function (obj) {
       if (!obj.error) {
@@ -113,17 +115,17 @@ function createGIF() {
           animatedImage.src = image;
           document.body.appendChild(animatedImage);
 
-          download = document.createElement("button")
-          // download.href = image;
-          // download.className = "button"
-          download.name = "Download GIF"
-          // download.data="computationalPotatoGIF.gif"
-          download.target="_blank"
-          download.setAttribute('class', "button")
-          download.setAttribute('data', image)
-          download.setAttribute('download', "computationalPotatoGIF.gif")
-          // console.log(download.href)
-          document.body.appendChild(download)
+          // download = document.createElement("button")
+          // // download.href = image;
+          // // download.className = "button"
+          // download.name = "Download GIF"
+          // // download.data="computationalPotatoGIF.gif"
+          // download.target="_blank"
+          // download.setAttribute('class', "button")
+          // download.setAttribute('data', image)
+          // download.setAttribute('download', "computationalPotatoGIF.gif")
+          // // console.log(download.href)
+          // document.body.appendChild(download)
 
       }
     });
