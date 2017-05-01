@@ -38,28 +38,72 @@ function processVideoToImages() {
 
 // TODO add a python script and call it here that processes the images and combines
 // them using the mask (pull parts from the first image and second/3rd/4th etc image)
+// function coreProcessing() {
+//     console.log("coreProcessing started")
+//     var process = spawn('python',["test.py"]);
+//     util.log('reading in python file')
+//     process.stdout.on('data',function(chunk){
+//         var textChunk = chunk.toString('utf8');// buffer to string
+//         if (textChunk.includes("FRAME MODIFICATION COMPLETE")) {
+//             alert("Frame modification complete")
+//             // location.reload()
+//         }
+//     });
+// }
+
+
 function coreProcessing() {
-    console.log("coreProcessing started")
-    var process = spawn('python',["processing.py"]);
-    util.log('reading in python file')
+    var process = spawn('python',["coreProcessing.py"]);
+    util.log('reading in python file to convert video to images')
     process.stdout.on('data',function(chunk){
         var textChunk = chunk.toString('utf8');// buffer to string
-        console.log(textChunk)
+        // console.log(textChunk)
         util.log(textChunk);
-        alert("Video to image conversion complete")
+        if (textChunk.includes("FRAME MODIFICATION COMPLETE")) {
+            alert("Frame modification complete")
+            // location.reload()
+        }
+        // alert("Video to image conversion complete")
     });
 }
+
+var imagesArray = []
+function createGIF0() {
+    console.log("creating GIF")
+    const imageSource = './images/out';
+    const fs = require('fs');
+    count = 0
+    fs.readdir(imageSource, (err, files) => {
+      files.forEach(file => {
+        // console.log(file);
+        if (file.includes('videoframe')) {
+            imagesArray.push( "images/out/" + file)
+        }
+        count += 1
+        if (count == files.length) {
+            createGIF()
+        }
+        
+      });
+    })
+    
+    console.log(imagesArray)
+    
+}
+
 
 // TODO create a function that calls node module to create a GIF from the output images
 function createGIF() {
     gifshot.createGIF({
     gifWidth: 320,
     gifHeight: 240,
-    images: [
-        'http://i.imgur.com/2OO33vX.jpg',
-        'http://i.imgur.com/qOwVaSN.png',
-        'http://i.imgur.com/Vo5mFZJ.gif'
-    ],
+    // images: [
+    //     'http://i.imgur.com/2OO33vX.jpg',
+    //     'http://i.imgur.com/qOwVaSN.png',
+    //     'http://i.imgur.com/Vo5mFZJ.gif',
+    //     'images/out/videoframe0001.jpg'
+    // ],
+    images: imagesArray,
     interval: 0.15,
     numFrames: 20,
     text: 'computationalPotatoes'

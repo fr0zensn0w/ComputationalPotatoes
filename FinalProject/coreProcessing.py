@@ -6,16 +6,51 @@
 
 # TODO: use homework 6 that uses the mask
 
+
 import cv2
 import os
-# Load two images
+import sys
 
-SRC_FOLDER = "images/source/"
+
+
+print("Inside core processing python file")
+sys.stdout.flush()
+# Load two images
+imageNames = []
+
+SRC_FOLDER = "images/source"
 subfolders = os.walk(SRC_FOLDER)
-for dirpath, dirnames, fnames in subfolders:
-    print(dirpath)
-    print(dirnames)
-    print(fnames)
+OUT_FOLDER = "images/out"
+
+frameOne = cv2.imread(os.path.join(SRC_FOLDER,"videoframe0001.jpg"), cv2.IMREAD_COLOR)
+mask = cv2.imread(os.path.join(SRC_FOLDER, "mask.jpg"), cv2.IMREAD_COLOR)
+cv2.imwrite("mask2.jpg", mask)
+imageSize = frameOne.size
+# print(frameOne.size)
+# print(mask.size)
+
+# for dirpath, dirnames, fnames in subfolders:
+#     # print(dirpath)
+#     # print(dirnames)
+
+
+# Loop through all video frame files
+for file in os.listdir(SRC_FOLDER):
+	if "videoframe" in file:
+		print()
+		currFrame = cv2.imread(os.path.join(SRC_FOLDER, file), cv2.IMREAD_COLOR)
+		if currFrame != None:
+			for i in range(frameOne.shape[0]):
+				for j in range(frameOne.shape[1]):
+					if mask[i][j].any() == 0: # Not black/not mask
+						currFrame[i][j] = frameOne[i][j]
+			cv2.imwrite(os.path.join(OUT_FOLDER, file), currFrame)
+			print(file + " has been written")
+			sys.stdout.flush()
+
+print("FRAME MODIFICATION COMPLETE")
+
+sys.stdout.flush()
 
 #  CODE FROM ONLINE at http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_core/py_image_arithmetics/py_image_arithmetics.html
 #
