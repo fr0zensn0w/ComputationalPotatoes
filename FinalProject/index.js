@@ -97,7 +97,7 @@ function createGIF0() {
 // TODO create a function that calls node module to create a GIF from the output images
 function createGIF() {
     gifshot.createGIF({
-    gifWidth: 320,
+    gifWidth: 427,
     gifHeight: 240,
     // images: [
     //     'http://i.imgur.com/2OO33vX.jpg',
@@ -106,8 +106,8 @@ function createGIF() {
     //     'images/out/videoframe0001.jpg'
     // ],
     images: imagesArray,
-    interval: 0.005,
-    numFrames: count,
+    // interval: 1,
+    // numFrames: count/2,
     text: 'computationalPotatoes'
     }, function (obj) {
       if (!obj.error) {
