@@ -14,7 +14,6 @@ function openFileCabinet() {
     // TODO: put code in here to open the gallery, AKA open up to where the images are stored
     fullPath = "/Users/liquidsn0w/Desktop/"
     fullPath = __dirname + "/images"
-    // shell.beep() //makes a beeping sound
     shell.showItemInFolder(fullPath)
 }
 
@@ -32,26 +31,10 @@ function processVideoToImages() {
             alert("Video to Image Conversion Complete")
             location.reload()
         }
-        // alert("Video to image conversion complete")
     });
 }
 
-// TODO add a python script and call it here that processes the images and combines
-// them using the mask (pull parts from the first image and second/3rd/4th etc image)
-// function coreProcessing() {
-//     console.log("coreProcessing started")
-//     var process = spawn('python',["test.py"]);
-//     util.log('reading in python file')
-//     process.stdout.on('data',function(chunk){
-//         var textChunk = chunk.toString('utf8');// buffer to string
-//         if (textChunk.includes("FRAME MODIFICATION COMPLETE")) {
-//             alert("Frame modification complete")
-//             // location.reload()
-//         }
-//     });
-// }
-
-
+// core processing that blends the images together using the mask and pyramids
 function coreProcessing() {
     var process = spawn('python',["coreProcessing.py"]);
     util.log('reading in python file to convert video to images')
@@ -62,7 +45,6 @@ function coreProcessing() {
         if (textChunk.includes("FRAME MODIFICATION COMPLETE")) {
             // alert("Frame modification complete")
             createGIF0()
-            // location.reload()
         }
         // alert("Video to image conversion complete")
     });
@@ -94,17 +76,11 @@ function createGIF0() {
 }
 
 
-// TODO create a function that calls node module to create a GIF from the output images
+// function that makes the GIF from the series of images that have been processed
 function createGIF() {
     gifshot.createGIF({
     gifWidth: 427,
     gifHeight: 240,
-    // images: [
-    //     'http://i.imgur.com/2OO33vX.jpg',
-    //     'http://i.imgur.com/qOwVaSN.png',
-    //     'http://i.imgur.com/Vo5mFZJ.gif',
-    //     'images/out/videoframe0001.jpg'
-    // ],
     images: imagesArray,
     // interval: 1,
     // numFrames: count/2,

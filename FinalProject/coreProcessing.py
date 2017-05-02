@@ -17,7 +17,7 @@ OUT_FOLDER = "images/out"
 
 frameOne = cv2.imread(os.path.join(SRC_FOLDER,"videoframe0001.jpg"), cv2.IMREAD_COLOR)
 mask = cv2.imread(os.path.join(SRC_FOLDER, "mask.jpg"), cv2.IMREAD_COLOR)
-cv2.imwrite("mask2.jpg", mask)
+# cv2.imwrite("mask2.jpg", mask)
 imageSize = frameOne.size
 newMask = frameOne.copy()
 for i in range(frameOne.shape[0]):
@@ -78,12 +78,6 @@ for file in os.listdir(SRC_FOLDER):
 			for i in range(length):
 				LS.append(lpB[i]*gpM[length-i-1] + lpA[i]*(1-gpM[length-i-1]))
 
-			# now reconstruct
-			# ls_ = LS[0]
-			# for i in xrange(1,6):
-			# 	ls_ = cv2.pyrUp(ls_)
-			# 	ls_ = cv2.add(ls_, LS[i])
-
 			ls_ = LS[0]
 			for i in xrange(1,6):
 				rows,cols = LS[i].shape[:2]
@@ -98,5 +92,4 @@ for file in os.listdir(SRC_FOLDER):
 			sys.stdout.flush()
 
 print("FRAME MODIFICATION COMPLETE")
-
 sys.stdout.flush()

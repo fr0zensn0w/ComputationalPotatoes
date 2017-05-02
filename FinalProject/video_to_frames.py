@@ -9,9 +9,6 @@ vidcap = cv2.VideoCapture('source.mp4')
 success,image = vidcap.read()
 count = 0
 success = True
-# print(os.path.join("images", "source"))
-# out1 = os.path.join("images", "source")
-# out2 = os.path.join(out1, "")
 out = os.path.join("images", "source", "video")
 while success:
     success,image = vidcap.read()
