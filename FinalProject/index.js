@@ -82,8 +82,8 @@ function createGIF() {
     gifWidth: 427,
     gifHeight: 240,
     images: imagesArray,
-    // interval: 1,
-    // numFrames: count/2,
+    // interval: .1,
+    // numFrames: count/4,
     text: 'computationalPotatoes'
     }, function (obj) {
       if (!obj.error) {
