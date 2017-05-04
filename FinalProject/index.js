@@ -82,14 +82,15 @@ function createGIF() {
     gifWidth: 427,
     gifHeight: 240,
     images: imagesArray,
-    // interval: .1,
-    // numFrames: count/4,
+    interval: .03,
+    numFrames: count*5,
     text: 'computationalPotatoes'
     }, function (obj) {
       if (!obj.error) {
           var image = obj.image, animatedImage = document.createElement('img');
           animatedImage.src = image;
-          document.body.appendChild(animatedImage);
+          end = document.getElementById('endBody');
+          end.appendChild(animatedImage);
 
           // download = document.createElement("button")
           // // download.href = image;

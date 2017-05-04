@@ -82,7 +82,7 @@ var __slice = Array.prototype.slice;
       console.log(this.el)
       fs.writeFile('images/source/mask.jpg', buffer, function (err) {
           console.log("image written to images/source")
-          alert("mask saved")
+          alert("Mask Saved")
       })
       return
 // ------ Electron downloading of the canvas end

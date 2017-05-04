@@ -50,6 +50,23 @@
           }
         </style>
 
+
+        <style>
+          #myProgress {
+            width: 100%;
+            background-color: #ddd;
+          }
+
+          #myBar {
+            width: 0%;
+            height: 30px;
+            background-color: #00E3CC;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+          }
+        </style>
+
     </head>
     <!-- <body bgcolor="#2C2C2C"> -->
     <body>
@@ -70,15 +87,25 @@
       <!-- NEED FOR ELECTRON 2/2-->
       <script>if (window.module) module = window.module;</script>
 
+
+
+      <!-- <button class="button" href="#" onclick="clearImages()">Click to delete old images to make a new GIF</button> -->
       <button class="button" href="#" onclick="openFileCabinet()">Click to upload video</button>
       <button class="button" href="#" onclick="processVideoToImages()">Click to convert the video to images</button>
+      <img src="icons/png/256x256.png" alt="Interactive Cinemagraphs" style="width:40px;height:40px;margin-left:150px">
+
+      <!-- <div id="myProgress">
+        <div id="myBar">0%</div>
+      </div> -->
+
+
 
 
       <header>________________________________________________________________________________________________________</header>
-      <header>Draw over the part you would like to keep the motion</header>
+      <header>Draw over the part that has the motion you want to keep.</header>
       <div class='demo' id='colors_demo'>
           <div class='tools'>
-            <a href='#colors_sketch' data-download='png' style='float: right; width: 100px;'>Download</a>
+            <a href='#colors_sketch' data-download='png' style='float: right; width: 100px;'>Save Mask</a>
           </div>
           <canvas id='colors_sketch' width=w height=h style="background:url(images/source/videoframe0001.jpg) no-repeat center center;"></canvas>
           <script type='text/javascript'>
@@ -112,8 +139,10 @@
         </div>
 
         <header>________________________________________________________________________________________________________</header>
-        <button onclick="coreProcessing()" class="button">Click to create your cinemagraph</button>
-        <button onclick="createGIF0()" class="button">Click to create your GIF</button>
+        <button onclick="coreProcessing()" class="button">Create Cinemagraph</button>
+        <!-- <button onclick="createGIF0()" class="button">Click to create your GIF</button> -->
+        <div id="endBody"></div>
+
 
 
     </body>
